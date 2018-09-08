@@ -1,0 +1,253 @@
+﻿@using OneTETH.Model.Models.DTO;
+@model List<EzyMonitorExpHeaderDTO>
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">CUSTOMS DECLARATION</h3>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Invoice Date (From - To)</label>
+                    @Html.EJ().DateRangePicker("invoiceDate").DateFormat("dd/MM/yyyy").ShowRoundedCorner(true)
+                </div>
+            </div>
+            @*<div class="col-md-4">
+                    <div class="form-group">
+                        <label>Invoice Date (To)</label>
+                        @Html.EJ().DatePicker("invoiceTo").DateFormat("dd/MM/yyyy")
+                    </div>
+                </div>*@
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Invoice No</label>
+                    @*@Html.EJ()TextBox("invoiceNo", "Key In Full or Partial Invoice No", new { @class = "e-textbox"} )*@
+                    <input type="text" id="invoiceNo" class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label></label>
+                <button type="button" class="btn btn-block btn-primary" onclick="PopulateMonitorHeader()">
+                    <i class="fa fa-search"></i>&nbsp;Search
+                </button>
+            </div>
+            <div class="col-md-2">
+                <label></label>
+                <button type="button" class="btn btn-block btn-default" onclick="Clear()">
+                    <i class="fa fa-eraser" aria-hidden="true"></i>&nbsp;Clear
+                </button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12" id="divMonitorHeader">
+                @{
+                    var Invoicegeader = ViewBag.GetInvoiceHeader;
+                    Dictionary<string, object> btn = new Dictionary<string, object>();
+                    btn.Add("id", "AddButton");
+                    btn.Add("style", "height: 28px; width: 25px;");
+                    Html.EJ().Grid<object>("FlatGrid")
+                .Datasource(ds => ds.Json(Model))
+                .AllowSorting()
+                .SortSettings(sort => sort.SortedColumns(col => col.Field("SubmissionDate").Direction(SortOrder.Descending).Add()))
+                //.ToolbarSettings(toolBar => toolBar.ShowToolbar().ToolbarItems(items =>
+                //{
+                //    items.AddTool(ToolBarItems.Search);
+
+                //    (ToolBarItems.ExcelExport);
+                //    items.AddTool(ToolBarItems.PdfExport);
+
+                //}))
+                .AllowScrolling()
+                //.AllowScrolling()
+                //.ScrollSettings(col => { col.Width("auto").Height("auto"); })
+                .AllowPaging()
+                .AllowTextWrap()
+                    .IsResponsive(true)
+                    //.EnableResponsiveRow(true)
+                    .ShowColumnChooser()
+                    .AllowFiltering()
+                    .FilterSettings(filter => { filter.ShowFilterBarStatus(true); })
+                    .AllowResizeToFit()
+                    .ClientSideEvents(evt => evt.RowSelected("MonitorHeaderRowClick"))
+                    .Columns(col =>
+                    {
+                        col.Field("txNoUUID").HeaderText("txNoUUID").IsPrimaryKey(true).ShowInColumnChooser(false).Visible(false).Add();
+                        col.Field("CompanyNameEnglish").Width(200).HeaderText("Trader Name").Priority(1).Visible(false).Add();
+                        col.Field("CustomsBrokerName").HeaderText("Customs Broker").Priority(2).Add();
+                        //col.HeaderText("Customs Broker").Template("{{:BrokerTaxNumber}} - {{:CustomsBrokerName}}").Priority(2).Add();
+                        col.Field("DocumentType").HeaderText("Document Type").Priority(3).Add();
+
+                        col.Field("ReferenceNumber").HeaderText("Reference No").Priority(5).Add();
+                        col.Field("SubmissionDate").HeaderText("Submission Date").Format("{0:dd/MM/yyyy}").Priority(12).Add();
+
+                        col.Field("Status").HeaderText("Status").Priority(7).Add();
+
+                        col.Field("DeclarationNumber").HeaderText("Declaration No").Priority(6).Add();
+                        col.Field("MasterBillofLading").HeaderText("Master BL").Priority(8).Visible(false).Add();
+                        col.Field("HouseBillofLanding").HeaderText("House BL").Priority(9).Visible(false).Add();
+                        col.Field("DepartureDate").HeaderText("Departure Date").Format("{0:dd/MM/yyyy}").Priority(4).Add();
+                        col.Field("DestinationCountryCode").HeaderText("Destination Country").Priority(13).Add();
+                        col.Field("TotalPackageAmount").HeaderText("Total Package").Visible(false).TextAlign(TextAlign.Right).Priority(14).Add();
+                        col.Field("TotalGrossWeight").HeaderText("Total Gross Weight").Visible(false).Format("{0:N3}").TextAlign(TextAlign.Right).Priority(15).Add();
+                        col.Field("TotalNetWeight").HeaderText("Total Net Weight").Visible(false).Format("{0:N3}").TextAlign(TextAlign.Right).Priority(16).Add();
+                        col.Field("VesselName").HeaderText("Carrier").Visible(false).TextAlign(TextAlign.Left).Priority(17).Add();
+                        //col.Field("Manager Name").HeaderText("Manager Name").TextAlign(TextAlign.Right).Priority(18).Add();
+                        //col.Field("RGSCode").HeaderText("Status").Priority(7).Add();
+                        col.HeaderText("XML").Width(50)
+
+                        //.Template("{{if XML_ID != null && XML_ID != '' }}<a href='/Ezymonitor/DownfalertloadXML?XML_ID={{:XML_ID}}'> &#x25BC; </a>{{/if}}").Priority(10).Add();
+                        .Template("{{if XML_ID != null && XML_ID != '' }}<a href='/Ezymonitor/DownloadXML?XML_ID={{:XML_ID}}'> &#x25BC; </a>{{/if}}").Priority(10).Visible(false).Add();
+
+                        //< a href = '/Ezymonitor/DownloadXML?XML_ID={{:XML_ID}}' > < i class="fa fa-home fa-fw" aria-hidden="true"></i>& nbsp; Test </ a >
+                        col.HeaderText("PDF").Width(50)
+                        .Template("{{if PDF_ID != null && PDF_ID != '' }}<a href='/Ezymonitor/DownloadPDF?PDF_ID={{:PDF_ID}}'>&#x25BC;</a>{{/if}}").Priority(11).Add();
+
+                        col.HeaderText("Actions").Commands(command =>
+                        {
+                            command.Type("Edit")
+                                           .ButtonOptions(new Syncfusion.JavaScript.Models.ButtonProperties()
+                                           {
+                                               ContentType = ContentType.ImageOnly,
+
+                                               HtmlAttributes = btn,
+                                               //Text = "Edit",
+                                               PrefixIcon = "fa fa-eye",
+                                               Click = "onClick"
+                                           }).Add();
+                        }).ShowInColumnChooser(false)
+                                    .TextAlign(TextAlign.Center)
+                                    .Add();
+
+                    }).Render();
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="DocumentInformationDiv"></div>
+
+<div id="InvoiceDetailDiv"></div>
+
+<div id="InvoiceDetailInfoDiv"></div>
+
+
+
+
+
+
+
+
+
+@section Scripts {
+    <script type="text/javascript">
+        function onClick(args) {
+            var txNoUUID = this.element.closest("tr").find('td:first').text();
+            PopulateMonitorDetailAndInvoiceHeader(txNoUUID);
+        }
+
+        function rendercontrols(id) {
+            ej.widget.init($('#' + id));
+        }
+
+        function PopulateMonitorDetailAndInvoiceHeader(txNoUUID) {
+            $.ajax({
+                url: '/ezymonitor/PopulateMonitorDetailAndInvoiceHeader',
+                type: 'get',
+                data: { Id: txNoUUID },
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (data) {
+                    $("#InvoiceDetailDiv, #InvoiceDetailInfoDiv").html("");
+                    $('#DocumentInformationDiv').html(data);
+                    rendercontrols('DocumentInformationDiv');
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                }
+            });
+        }
+
+        function ViewInvoices(args) {
+            var invoiceHUUID = this.element.closest("tr").find('td:first').text();
+            PopulateInvoiceDetail(invoiceHUUID);
+        }
+        function PopulateInvoiceDetail(invoiceHUUID) {
+            $.ajax({
+                url: '/ezymonitor/PopulateInvoiceDetail',
+                type: 'get',
+                data: { Id: invoiceHUUID },
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (data) {
+                    $("#InvoiceDetailInfoDiv").html("");
+                    $('#InvoiceDetailDiv').html(data);
+                    rendercontrols('InvoiceDetailDiv');
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                }
+            });
+        }
+
+        function ViewInvoiceDetailInfoAndPermit(args) {
+            var invoiceDUUID = this.element.closest("tr").find('td:first').text();
+            PopulateInvoiceDetailInfoAndPermit(invoiceDUUID);
+        }
+        function PopulateInvoiceDetailInfoAndPermit(invoiceDUUID) {
+            $.ajax({
+                url: '/ezymonitor/PopulateInvoiceDetailInfoAndPermit',
+                type: 'get',
+                data: { Id: invoiceDUUID },
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (data) {
+                    $('#InvoiceDetailInfoDiv').html(data);
+                    rendercontrols('InvoiceDetailInfoDiv');
+
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                }
+            });
+        }
+
+        function PopulateMonitorHeader() {
+            var dates = $("#invoiceDate").data("ejDateRangePicker").model.value.split(" - ");
+            $.ajax({
+                url: '/ezymonitor/PopulateMonitorHeader',
+                type: 'get',
+                data: { InvoiceFrom: dates[0], InvoiceTo: dates[1], InvoiceNo: $('#invoiceNo').val() },
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (data) {
+                    $('#divMonitorHeader').html(data);
+                    rendercontrols('divMonitorHeader');
+                    // $('#divMonitorHeader').html(data);
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                }
+            });
+        }
+        function Clear() {
+            $('#invoiceDate, #invoiceNo').val("");
+        }
+        function collapse(ths) {
+            if ($(ths).hasClass("fa-minus")) {
+                $(ths).removeClass("fa-minus").addClass("fa-plus");
+                $(ths).parents(".box-primary").addClass("collapsed-box");
+            } else {
+                $(ths).removeClass("fa-plus").addClass("fa-minus");
+                $(ths).parents(".box-primary").removeClass("collapsed-box");
+            }
+        }
+    </script>
+}

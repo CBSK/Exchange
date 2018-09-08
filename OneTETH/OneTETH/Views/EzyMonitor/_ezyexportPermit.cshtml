@@ -1,0 +1,42 @@
+﻿@using OneTETH.Model.Models.DTO;
+@model List<EzyExportPermitDTO>
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">PERMIT</h3>
+    </div>
+    <div class="box-body">
+        @{
+            Dictionary<string, object> btn = new Dictionary<string, object>();
+
+            Html.EJ().Grid<object>("InvoicePermit")
+        .Datasource(ds => ds.Json(Model))
+        .AllowSorting()
+        //.ToolbarSettings(toolBar => toolBar.ShowToolbar().ToolbarItems(items =>
+        //{
+        //    items.AddTool(ToolBarItems.ExcelExport);
+        //    items.AddTool(ToolBarItems.PdfExport);
+        //}))
+        .AllowScrolling()
+        .AllowPaging()
+        .IsResponsive(true)
+        .EnableResponsiveRow(true)
+        //.ShowColumnChooser()
+        .AllowFiltering()
+        //.ClientSideEvents(evt => evt.RowSelected("MonitorHeaderRowClick1"))
+        .Columns(col =>
+        {
+            col.Field("PermitUUID").HeaderText("PermitUUID").IsPrimaryKey(true).ShowInColumnChooser(false).Visible(false).Add();
+            col.Field("InvoiceDUUID").HeaderText("InvoiceDUUID").ShowInColumnChooser(false).Visible(false).Add();
+            col.Field("PermitNumber").HeaderText("Permit No").Priority(1).Add();
+            col.Field("DisplayIssueDate").HeaderText("Issue Date").Priority(2).Add();
+            col.Field("PermitIssueAuthority").HeaderText("Permit Issue Authority").Priority(3).Add();
+        }).Render();
+
+        }
+
+
+    </div>
+</div>
+
+@Html.EJ().ScriptManager()

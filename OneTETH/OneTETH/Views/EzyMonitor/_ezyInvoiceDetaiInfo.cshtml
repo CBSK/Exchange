@@ -1,0 +1,246 @@
+﻿@using OneTETH.Model.Models.DTO;
+@model EzyInvoiceExpDetailDTO
+
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">DECLARATION ITEM DETAIL</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i onclick="collapse(this)" class="fa fa-minus"></i></button>
+        </div>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form role="form">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Declaration Item Number</label>
+                        @Html.TextBoxFor(m => m.ItemNumber, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Invoice Number</label>
+                        @Html.TextBoxFor(m => m.InvoiceNumber, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Invoice Item Number</label>
+                        @Html.TextBoxFor(m => m.InvoiceItemNumber, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Tariff Code</label>
+                        @Html.TextBoxFor(m => m.TariffCode, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Tariff Sequence</label>
+                        @Html.TextBoxFor(m => m.TariffSequence, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Statistical Code</label>
+                        @Html.TextBoxFor(m => m.StatisticalCode, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Export Tariff</label>
+                        @Html.TextBoxFor(m => m.ExportTariff, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Privilege Code</label>
+                        @Html.TextBoxFor(m => m.PrivilegeCode, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Product Code</label>
+                        @Html.TextBoxFor(m => m.ProductCode, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Goods Description - Thai</label>
+                        @Html.TextAreaFor(m => m.ThaiDescriptionOfGoods, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Goods Description - English</label>
+                        @Html.TextAreaFor(m => m.EnglishDescriptionOfGoods, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Product Year</label>
+                        @Html.TextBoxFor(m => m.ProductYear, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Brand Name</label>
+                        @Html.TextBoxFor(m => m.BrandName, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Invoice Quantity</label>
+                        @Html.TextBoxFor(m => m.InvoiceQuantity, new { @class = "form-control", @readonly = "true", Value = String.Format("{0:0,0.000}", Model.InvoiceQuantity) })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Invoice Quantity Unit Code</label>
+                        @Html.TextBoxFor(m => m.InvoiceQuantityUnitCode, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control", @readonly = "true", Value = String.Format("{0:0,0.000}", Model.Quantity) })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Quantity Unit Code</label>
+                        @Html.TextBoxFor(m => m.QuantityUnitCode, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Currency Code</label>
+                        @Html.TextBoxFor(m => m.CurrencyCode, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Net Weight</label>
+                        @Html.TextBoxFor(m => m.NetWeight, new { @class = "form-control", @readonly = "true", Value = String.Format("{0:0,0.000}", Model.NetWeight) })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Net Weight Unit Code</label>
+                        @Html.TextBoxFor(m => m.NetWeightUnitCode, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Invoice Amount Foreign</label>
+                        @Html.TextBoxFor(m => m.InvoiceAmountForeign, new { @class = "form-control", @readonly = "true", Value = String.Format("{0:n}", Model.InvoiceAmountForeign) })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Invoice Amount Baht</label>
+                        @Html.TextBoxFor(m => m.InvoiceAmountBaht, new { @class = "form-control", @readonly = "true", Value = String.Format("{0:n}", Model.InvoiceAmountBaht) })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Ref. Declaration Number</label>
+                        @Html.TextBoxFor(m => m.ReferenceDeclarationNumber, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Ref. Declaration Line Number</label>
+                        @Html.TextBoxFor(m => m.ReferenceDeclarationLineNumber, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>FOB Value Foreign</label>
+                        @Html.TextBoxFor(m => m.FobvalueForeign, new { @class = "form-control", @readonly = "true", Value = String.Format("{0:n}", Model.FobvalueForeign) })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>FOB Value Baht</label>
+                        @Html.TextBoxFor(m => m.FobvalueBhat, new { @class = "form-control", @readonly = "true", Value = String.Format("{0:n}", Model.FobvalueBhat) })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="checkbox" @(Convert.ToString(Model.ReImportationCertificate).ToLower() == "y" ? "checked='checked'" : string.Empty) disabled="disabled"/>
+                        <label>Re - Importation Ceritificate</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="checkbox" @(Convert.ToString(Model.Boi).ToLower() == "y" ? "checked='checked'" : string.Empty) disabled="disabled"/>
+                        <label>BOI</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="checkbox" @(Convert.ToString(Model.Bond).ToLower() == "y" ? "checked='checked'" : string.Empty) disabled="disabled"/>
+                        <label>BOND</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="checkbox" @(Convert.ToString(Model.Bis19).ToLower() == "y" ? "checked='checked'" : string.Empty) disabled="disabled"/>
+                        <label>19BIS</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="checkbox" @(Convert.ToString(Model.ReExport).ToLower() == "y" ? "checked='checked'" : string.Empty) disabled="disabled" />
+                        <label>Re - Export</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="checkbox" @(Convert.ToString(Model.Fz).ToLower() == "y" ? "checked='checked'" : string.Empty) disabled="disabled" />
+                        <label>Free Zone</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="checkbox" @(Convert.ToString(Model.Ieat).ToLower() == "y" ? "checked='checked'" : string.Empty) disabled="disabled" />
+                        <label>I-EAT</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="checkbox" @(Convert.ToString(Model.Compensation).ToLower() == "y" ? "checked='checked'" : string.Empty) disabled="disabled" />
+                        <label>Compensation</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@Html.Partial("_ezyexportPermit", ViewData["ExportPermits"])
+
+

@@ -1,0 +1,11 @@
+﻿<div class="panel panel-danger">
+    <div class="panel-heading">Fix following errors</div>
+    <div class="panel-body">
+        <ul>
+            @foreach (var error in (ViewBag.Errors as IEnumerable<string>))
+            {
+                <li><label class="text-danger"> @error </label></li>
+            }
+        </ul>
+    </div>
+</div>

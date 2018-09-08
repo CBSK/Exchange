@@ -1,0 +1,286 @@
+﻿@using OneTETH.Model.Models.DTO;
+@model EzyMonitorExpHeaderDTO
+<!-- general form elements -->
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">DECLARATION CONTROL</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form role="form">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Reference No</label>
+                        @Html.TextBoxFor(m => m.ReferenceNumber, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Document Type</label>
+                        @Html.TextBoxFor(m => m.DocumentType, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Status</label>
+                        @Html.TextBoxFor(m => m.Status, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Declaration No</label>
+                        @Html.TextBoxFor(m => m.DeclarationNumber, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Company Tax Number</label>
+                        @Html.TextBoxFor(m => m.CompanyTaxNumber, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Company Branch</label>
+                        @Html.TextBoxFor(m => m.CompanyBranch, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Customs Broker Tax Number</label>
+                        @Html.TextBoxFor(m => m.BrokerTaxNumber, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Customs Broker Branch</label>
+                        @Html.TextBoxFor(m => m.BrokerBranch, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Company Name Thai</label>
+                        @Html.TextBoxFor(m => m.CompanyNameThai, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Customs Broker Company Name</label>
+                        @Html.TextBoxFor(m => m.CustomsBrokerName, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Company Name English</label>
+                        @Html.TextBoxFor(m => m.CompanyNameEnglish, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Company Manager Name</label>
+                        @Html.TextBoxFor(m => m.ManagerName, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+            </div>
+            <hr style="border:1px solid grey" />
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Mode of Transport</label>
+                        @Html.TextBoxFor(m => m.ModeOfTransportDesc, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Vessel Name</label>
+                        @Html.TextBoxFor(m => m.VesselName, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <label>Departure Date</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            @{
+                        string date = Model.DepartureDate != null ? Model.DepartureDate.Value.ToString("dd/MM/yyyy") : "";
+                            }
+                            <input type="text" value="@date" class="form-control" readonly="readonly" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Master Bill of Lading</label>
+                        @Html.TextBoxFor(m => m.MasterBillofLading, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>House Bill of Lading</label>
+                        @Html.TextBoxFor(m => m.HouseBillofLanding, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Total Package Amount</label>
+                        @Html.TextBoxFor(m => m.TotalPackageAmount, new { @class = "form-control", @readonly = "true", Value = String.Format("{0:n}", Model.TotalPackageAmount) })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Total Package Unit Code</label>
+                        @Html.TextBoxFor(m => m.TotalPackageUnitCode, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Release Port</label>
+                        @Html.TextBoxFor(m => m.ReleasePort, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Loading Port</label>
+                        @Html.TextBoxFor(m => m.LoadPort, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Total Net Weight</label>
+                        @Html.TextBoxFor(m => m.TotalNetWeight, new { @class = "form-control", @readonly = "true", Value = String.Format("{0:n}", Model.TotalNetWeight) })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Net Weight Unit Code</label>
+                        @Html.TextBoxFor(m => m.NetWeightUnitCode, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Purchase Country Code</label>
+                        @Html.TextBoxFor(m => m.PurchaseCountryCode, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Destination Country Code</label>
+                        @Html.TextBoxFor(m => m.DestinationCountryCode, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Total Gross Weight</label>
+                        @Html.TextBoxFor(m => m.TotalGrossWeight, new { @class = "form-control", @readonly = "true", Value = String.Format("{0:n}", Model.TotalGrossWeight) })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Total Gross Weight Unit Code</label>
+                        @Html.TextBoxFor(m => m.TotalGrossWeightUnitCode, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Currency Code</label>
+                        @Html.TextBoxFor(m => m.CurrencyCode, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Exchange Rate</label>
+                        @Html.TextBoxFor(m => m.ExchangeRate, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>FOB Value Foreign</label>
+                        @Html.TextBoxFor(m => m.FOBValueForeign, new { @class = "form-control", @readonly = "true", Value = String.Format("{0:n}", Model.FOBValueForeign) })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>FOB Value Baht</label>
+                        @Html.TextBoxFor(m => m.FOBValueBaht, new { @class = "form-control", @readonly = "true", Value = String.Format("{0:n}", Model.FOBValueBaht) })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Payment Method</label>
+                        @Html.TextBoxFor(m => m.PaymentMethod, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Export Tax Incentive ID</label>
+                        @Html.TextBoxFor(m => m.ExportTaxIncentivesID, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Sub Broker Tax Number</label>
+                        @Html.TextBoxFor(m => m.SubBrokerTaxNumber, new { @class = "form-control", @readonly = "true" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    @if (Model.ModeOfTransport == "1")
+    {
+        <div class="box-body">
+            @{
+
+                Html.EJ().Grid<object>("CustomsDetail")
+            .Datasource(ds => ds.Json(ViewData["CustomsDetail"]))
+            .AllowSorting()
+            .AllowScrolling()
+            .AllowPaging()
+            .IsResponsive(true)
+            .EnableResponsiveRow(true)
+            //.ShowColumnChooser()
+            .AllowFiltering()
+            .SortSettings(sort => sort.SortedColumns(col => col.Field("AuditDateTime").Direction(SortOrder.Descending).Add()))
+            .Columns(col =>
+            {
+                col.Field("ContainerNumber").HeaderText("Container Number").Priority(1).Add();
+                col.Field("AuditDateTime").HeaderText("Audit DateTime").Format("{0:dd/MM/yyyy HH:mm:ss tt}").Priority(2).Add();
+            }).Render();
+                <script type="text/javascript" class="jsScript">
+                    setTimeout(function () {
+                        var proxy = $("#CustomsDetail").ejGrid("instance");
+                        var data = proxy._currentJsonData;
+                        var distinct = ej.distinct(data, "ContainerNumber", true);//Calculates the distinct
+                        proxy.dataSource(distinct);
+                    }, 3000);
+
+                </script>
+
+            }
+        </div>
+                }
+</div>
+
+@Html.Partial("_ezyInvoiceHeader", ViewData["InvoiceHeaders"])
+
+
+
+

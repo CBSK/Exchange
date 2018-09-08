@@ -1,0 +1,15 @@
+﻿@using Syncfusion.MVC.EJ
+@using Syncfusion.JavaScript
+
+@if (ViewData["Errors"] == null)
+{
+
+    @(Html.EJ().ReportViewer("viewer", @ViewBag.ezyExportMonitorReportViewer))
+}
+else
+{
+    @Html.Partial("_reportError")
+
+}
+
+@Html.EJ().ScriptManager()

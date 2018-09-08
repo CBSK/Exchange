@@ -1,0 +1,73 @@
+﻿@using OneTETH.Model.Models.DTO;
+@model List<EzyInvoiceExpHeaderDTO>
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">INVOICE</h3>
+    </div>
+    <div class="box-body">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-10 control-label">Total</label>
+
+                <div class="col-sm-2">
+                    <ej-numeric-text-box id="numeric" decimal-places="2" value="@Model.Select(x=>x.TotalInvoiceAmount).Sum()" read-only="true" />
+                    @*<ej-text-box id="numeric" value="@Model.Select(x=>x.TotalInvoiceAmount).Sum()" read-only="true" />*@
+
+                </div>
+            </div>
+        </form>
+        @{
+            Dictionary<string, object> btn = new Dictionary<string, object>();
+
+            Html.EJ().Grid<object>("InvoiceHeader")
+        .Datasource(ds => ds.Json(Model))
+        .AllowSorting()
+        .SortSettings(sort => sort.SortedColumns(col => col.Field("InvoiceNumber").Direction(SortOrder.Descending).Add()))
+        //.ToolbarSettings(toolBar => toolBar.ShowToolbar().ToolbarItems(items =>
+        //{
+        //    items.AddTool(ToolBarItems.ExcelExport);
+        //    items.AddTool(ToolBarItems.PdfExport);
+        //}))
+        .AllowScrolling()
+        .AllowPaging()
+        .IsResponsive(true)
+        .EnableResponsiveRow(true)
+        //.ShowColumnChooser)
+        .AllowFiltering()
+        //.ClientSideEvents(evt => evt.RowSelected("MonitorHeaderRowClick1"))
+        .Columns(col =>
+        {
+            col.Field("InvoiceHuuid").HeaderText("InvoiceHUUID").IsPrimaryKey(true).ShowInColumnChooser(false).Visible(false).Add();
+            col.Field("txNoUUID").HeaderText("txNoUUID").ShowInColumnChooser(false).Visible(false).Add();
+            col.Field("InvoiceNumber").HeaderText("Invoice No").Priority(1).Add();
+            col.Field("DisplayInvoiceDate").HeaderText("Date").TextAlign(TextAlign.Center).Priority(2).Add();
+            col.Field("TradeTerms").HeaderText("Incoterm").Priority(3).TextAlign(TextAlign.Center).Add();
+            col.Field("ConsigneeName").HeaderText("Buyer Name").Priority(4).Add();
+            col.Field("ConsigneeCountryCode").HeaderText("Country").Priority(5).TextAlign(TextAlign.Center).Add();
+            col.Field("InvoiceCurrencyCode").HeaderText("Currency Code").TextAlign(TextAlign.Center).Priority(6).Add();
+            col.Field("TotalInvoiceAmount").HeaderText("Amount").Format("{0:N2}").TextAlign(TextAlign.Right).Priority(7).Add();
+
+            col.HeaderText("Actions").Commands(command =>
+            {
+                command.Type("Edit")
+                       .ButtonOptions(new Syncfusion.JavaScript.Models.ButtonProperties()
+                       {
+                           ContentType = ContentType.ImageOnly,
+
+                           HtmlAttributes = btn,
+                           //Text = "Edit",
+                           PrefixIcon = "fa fa-eye",
+                           Click = "ViewInvoices"
+                       }).Add();
+            }).ShowInColumnChooser(false)
+                        .TextAlign(TextAlign.Center)
+                        .Add();
+
+        }).Render();
+
+        }
+
+    </div>
+</div>
+@Html.EJ().ScriptManager()

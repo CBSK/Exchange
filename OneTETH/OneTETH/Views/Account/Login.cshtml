@@ -1,0 +1,83 @@
+﻿@using OneTETH.Models;
+@model LoginModel
+@{
+    ViewData["Title"] = "TIFFA EDI - 1TE Login";
+    Layout = null;
+}
+
+
+<link href="~/Content/login/login.css" rel="stylesheet" />
+@*<link href="~/lib/login/demo/css/style.css" rel="stylesheet" />*@
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+<div class="row">
+    <div class="Absolute-Center is-Responsive">
+        <div id="logo-container">
+            <a href="#"><img src="~/Content/img/Logo_png.png" width="200" /></a>
+        </div>
+        <div class="panel-body-login">
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @id = "loginForm" }))
+            {
+                <div class="form-group input-group">
+                    <span class="input-group-addon"><i class="fa fa-user-o"></i></span>
+                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @placeholder = "User Name" })
+                </div>
+
+                <div class="form-group input-group">
+                    <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                </div>
+
+                <div class="form-group">
+                    <!-- Button -->
+                    @*<div class="col-md-12">*@
+                    <button type="submit" href="#" class="btn btn-default custom"><i class="fa fa-sign-in"></i>&nbsp; Log in</button>
+                    @*</div>*@
+                    @*<div class="col-md-4">*@
+                    <button type="submit" href="#" class="btn btn-default custom" disabled><i class="fa fa-handshake-o"></i>&nbsp; Subscribe</button>
+                    <button type="submit" href="#" class="btn btn-default custom" disabled><i class="fa fa fa-key text-danger"></i>&nbsp; Reset Password</button>
+                    @*</div>*@
+                    @*<button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i>Log in</button>*@
+                    @*@Html.ActionLink("Subscribe", "Register", "Account", "", new { @class = "btn btn-info pull-right", @disabled = "disabled" })*@
+                    @*@Html.ActionLink("Subscribe", "Register", "Account", "", new { @class = "btn btn-info", @disabled = "disabled" })*@
+                </div>
+            }
+        </div>
+
+        <hr />
+        <div class="text-center small">
+            Copyright &copy; 2017-2018 DNeX<i>PORT</i> Sdn Bhd. All Rights Reserved.
+            @*Copyright &copy; 2017-2018 <a href="javascrip:void(0)">1TE MY</a>.  All rights*@
+        </div>
+        <div class="text-center small">
+            <i>Version &alpha; 0.0.15</i>
+        </div>
+    </div>
+
+</div>
+        </div>
+
+    </div>
+
+</div>
+<div id="particles-js"></div>
+
+<!-- scripts -->
+<script src="~/Content/login/particles.js"></script>
+<script src="~/Content/login/demo/js/app.js"></script>
+<!-- stats.js -->
+<script src="~/Content/login/demo/js/lib/stats.js"></script>
+<script src="~/Scripts/jquery.js"></script>
+<script src="~/Scripts/jsrender.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+
+<script>
+    var count_particles, stats, update;
+
+    update = function () {
+        requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+</script>
